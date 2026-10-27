@@ -3,98 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <title>Registrasi Akun - Pitlane Network</title>
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Registrasi Akun - TKJ Network Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --fire:#ff5a1f; --amber:#ffc400; --lime:#8de03c; --red:#ff4d4d; --steel:#9aa0ad; --line:#2e2e36; --white:#f4f4f6; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            min-height: 100vh; display: flex; justify-content: center; align-items: center;
-            padding: 36px 20px; color: var(--white); font-family: 'Barlow', sans-serif;
-            background-color:#0e0e10;background-image:radial-gradient(circle at 50% 0%,rgba(255,90,31,.16),transparent 55%),linear-gradient(135deg,rgba(255,255,255,.03) 25%,transparent 25%),linear-gradient(225deg,rgba(255,255,255,.03) 25%,transparent 25%),linear-gradient(45deg,rgba(255,255,255,.03) 25%,transparent 25%),linear-gradient(315deg,rgba(255,255,255,.03) 25%,#0e0e10 25%);background-position:0 0,6px 0,6px 0,0 0,0 0;background-size:100% 100%,12px 12px,12px 12px,12px 12px,12px 12px;
-        }
-        .container {
-            position: relative; width: 100%; max-width: 430px; padding: 40px 32px 30px;
-            border-radius: 6px; background: linear-gradient(180deg, #1a1a1e 0%, #151518 100%);
-            border: 2px solid var(--line); border-left: 6px solid var(--fire);
-            box-shadow: 0 25px 50px rgba(0,0,0,.7), 0 0 40px rgba(255,90,31,.08);
-        }
-        /* Strip bendera balap di atas kartu */
-        .spots {
-            position: absolute; top: 0; left: 0; right: 0; height: 10px; border-radius: 4px 4px 0 0;
-            background: repeating-conic-gradient(#f4f4f6 0 25%, #0b0b0d 0 50%) 0 0 / 20px 20px;
-        }
-        .terminal-bar { display: flex; align-items: center; gap: 7px; margin-bottom: 22px; }
-        .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot-red { background: var(--red); } .dot-yellow { background: var(--amber); } .dot-green { background: var(--lime); }
-        .terminal-title { margin-left: auto; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--steel); }
-        .header { text-align: center; margin-bottom: 26px; }
-        .racing-icon {
-            width: 64px; height: 64px; margin: 0 auto 14px; display: flex; justify-content: center; align-items: center;
-            font-size: 30px; border-radius: 6px; background: #0b0b0d; border: 2px solid var(--fire);
-            box-shadow: 0 0 0 3px rgba(255,90,31,.2), 0 0 20px rgba(255,90,31,.35); transform: skewX(-8deg);
-        }
-        .header h1 {
-            font-family: 'Teko', sans-serif; font-weight: 600; font-size: 46px; line-height: 1; font-style: italic;
-            text-transform: uppercase; letter-spacing: .04em; color: #fff; text-shadow: 3px 3px 0 var(--fire); margin-bottom: 10px;
-        }
-        .header p {
-            display: inline-flex; align-items: center; gap: 10px; font-family: 'Barlow Semi Condensed', sans-serif;
-            font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--amber);
-        }
-        .header p::before, .header p::after { content: ""; width: 20px; height: 2px; background: var(--amber); }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 6px; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
-        .form-group input {
-            width: 100%; padding: 12px 14px; background: #0b0b0d; border: 2px solid var(--line); border-radius: 4px;
-            font-family: 'Barlow Semi Condensed', sans-serif; font-size: 16px; font-weight: 600; color: #fff; outline: none;
-            transition: border-color .2s ease, box-shadow .2s ease;
-        }
-        .form-group input::placeholder { color: #5c606b; font-weight: 500; }
-        .form-group input:focus { border-color: var(--fire); box-shadow: 0 0 0 3px rgba(255,90,31,.22); }
-        .btn {
-            width: 100%; margin-top: 10px; padding: 12px; border: none; border-radius: 4px;
-            background: linear-gradient(180deg, #ff7a3d 0%, var(--fire) 55%, #e03e08 100%); color: #fff;
-            font-family: 'Teko', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.1; font-style: italic;
-            text-transform: uppercase; letter-spacing: .12em; cursor: pointer; transform: skewX(-10deg);
-            box-shadow: 0 4px 0 #8f2400, 0 10px 22px rgba(255,90,31,.3); transition: transform .1s ease, box-shadow .1s ease, filter .2s ease;
-        }
-        .btn > span { display: inline-block; transform: skewX(10deg); }
-        .btn:hover { filter: brightness(1.08); }
-        .btn:active { transform: skewX(-10deg) translateY(3px); box-shadow: 0 1px 0 #8f2400; }
-        .btn:disabled { background: #2e2e36; color: #7a7f8c; box-shadow: 0 3px 0 #1a1a1e; cursor: not-allowed; }
-        .btn:focus-visible, .toggle-status:focus-visible, .status-check button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
-        .message { padding: 12px 14px; border-radius: 4px; margin-top: 16px; display: none; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 14px; font-weight: 600; text-align: center; border: 1px solid; border-left-width: 5px; }
-        .message.success { background: rgba(141,224,60,.12); color: var(--lime); border-color: var(--lime); }
-        .message.error { background: rgba(255,77,77,.12); color: #ff8080; border-color: var(--red); }
-        .message.info { background: rgba(255,196,0,.1); color: var(--amber); border-color: var(--amber); }
-        .register-link, .login-link { text-align: center; margin-top: 22px; color: var(--steel); font-size: 15px; font-weight: 500; }
-        .register-link a, .login-link a { color: var(--amber); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--amber); }
-        .register-link a:hover, .login-link a:hover { color: #fff; border-color: #fff; }
-        .loading { display: inline-block; width: 14px; height: 14px; border: 3px solid rgba(255,255,255,.35); border-radius: 50%; border-top-color: #fff; animation: spin .8s linear infinite; margin-right: 8px; vertical-align: middle; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .status-check { margin-top: 16px; padding: 16px; background: #0b0b0d; border: 2px dashed var(--line); border-radius: 4px; display: none; }
-        .status-check.show { display: block; }
-        .status-check input { width: calc(100% - 64px); padding: 10px 12px; background: #151518; border: 2px solid var(--line); border-radius: 4px; color: #fff; margin-right: 6px; outline: none; font-size: 14px; font-weight: 600; font-family: 'Barlow Semi Condensed', sans-serif; }
-        .status-check input:focus { border-color: var(--fire); }
-        .status-check button { padding: 10px 14px; background: var(--amber); color: #0b0b0d; border: none; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; font-family: 'Barlow Semi Condensed', sans-serif; }
-        .status-check button:hover { filter: brightness(1.1); }
-        .status-result { margin-top: 10px; padding: 10px 12px; border-radius: 4px; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 13px; font-weight: 600; display: none; border: 1px solid; border-left-width: 5px; }
-        .status-result.approved { background: rgba(141,224,60,.12); color: var(--lime); border-color: var(--lime); }
-        .status-result.pending { background: rgba(255,196,0,.1); color: var(--amber); border-color: var(--amber); }
-        .status-result.rejected { background: rgba(255,77,77,.12); color: #ff8080; border-color: var(--red); }
-        .status-result.not-found { background: rgba(154,160,173,.1); color: var(--steel); border-color: #5c606b; }
-        .toggle-status { background: none; border: none; color: var(--amber); cursor: pointer; font-family: 'Barlow Semi Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
-        .toggle-status:hover { color: #fff; }
-    
-    </style>
+:root{--base:#0f1216;--card:#161a20;--panel:#1c2128;--line:#2a303a;--line2:#3b434f;--ember:#ff6a1a;--ember2:#ff8a47;--text:#ece9e3;--muted:#8d949f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background-color:var(--base);
+ background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 2px,transparent 2px 8px),radial-gradient(ellipse at 50% -10%,rgba(255,106,26,.10),transparent 55%);
+ min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;color:var(--text);font-family:'Barlow',sans-serif}
+.container{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ember);border-radius:4px;
+ clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%);
+ box-shadow:0 30px 60px -20px rgba(0,0,0,.9);padding:36px;width:100%;position:relative}
+.terminal-bar{display:flex;align-items:center;gap:8px;margin-bottom:24px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.terminal-dot{width:8px;height:8px;border-radius:1px;transform:rotate(45deg)}
+.dot-red{background:#ef4444}.dot-yellow{background:var(--ember)}.dot-green{background:#6b7480}
+.terminal-title{margin-left:auto;margin-right:22px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.08em}
+.header{text-align:center;margin-bottom:26px}
+.header h1{font-family:'Barlow Condensed',sans-serif;color:var(--text);font-size:32px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin-bottom:6px}
+.header p{color:var(--ember2);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.racing-icon{width:56px;height:56px;margin:0 auto 14px;background:rgba(255,106,26,.08);color:var(--ember);border:1px solid rgba(255,106,26,.45);
+ border-radius:3px;display:flex;justify-content:center;align-items:center;transform:rotate(45deg)}
+.racing-icon svg{width:26px;height:26px;transform:rotate(-45deg)}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;margin-bottom:6px;color:var(--muted);font-weight:600;font-size:12px;letter-spacing:.06em}
+.form-group input{width:100%;padding:12px 14px;background:var(--base);border:1px solid var(--line);border-bottom:2px solid var(--line2);border-radius:3px;
+ font-size:14px;font-family:'JetBrains Mono',monospace;color:var(--text);outline:none;transition:border-color .15s,background .15s}
+.form-group input::placeholder{color:#59616d}
+.form-group input:focus{border-color:var(--ember);background:#0b0d10}
+.btn{width:100%;padding:13px;background:var(--ember);color:#14110e;border:none;border-radius:3px;font-size:17px;font-weight:700;
+ font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.12em;cursor:pointer;margin-top:6px;transition:background .15s,transform .1s}
+.btn:hover{background:var(--ember2)}.btn:active{transform:translateY(1px)}
+.btn:disabled{background:var(--line);color:#6b7480;cursor:not-allowed}
+:focus-visible{outline:2px solid var(--ember2);outline-offset:2px}
+.message{padding:12px 16px;border-radius:3px;margin-top:16px;display:none;font-size:12px;font-weight:500;font-family:'JetBrains Mono',monospace}
+.message.success{background:rgba(52,211,153,.08);color:#4ade80;border:1px solid rgba(52,211,153,.35)}
+.message.error{background:rgba(239,68,68,.08);color:#f87171;border:1px solid rgba(239,68,68,.35)}
+.message.info{background:rgba(255,106,26,.08);color:var(--ember2);border:1px solid rgba(255,106,26,.35)}
+.register-link,.login-link{text-align:center;margin-top:20px;color:var(--muted);font-size:14px}
+.register-link a,.login-link a{color:var(--ember2);text-decoration:none;font-weight:600}
+.register-link a:hover,.login-link a:hover{text-decoration:underline}
+.loading{display:inline-block;width:10px;height:10px;border:2px solid rgba(20,17,14,.3);border-radius:50%;border-top-color:#14110e;animation:spin .8s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.loading{animation-duration:2s}}
+.container{max-width:440px}
+.form-group{margin-bottom:13px}
+.message{text-align:center}
+</style>
 </head>
 <body>
     <div class="container">
-        <div class="spots"></div>
         <div class="terminal-bar">
             <div class="terminal-dot dot-red"></div>
             <div class="terminal-dot dot-yellow"></div>
