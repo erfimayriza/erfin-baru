@@ -3,37 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TKJ Hotspot Gateway - RouterOS Admin Panel</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Pit Wall - TKJ Hotspot Gateway Admin</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <!-- Google Fonts: Teko, Barlow & Barlow Semi Condensed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;600;700&family=Barlow:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <script>
+        // ====== TEMA MOTOR BALAP: merah racing MotoGP ======
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         dark: {
-                            base: '#0f1216',
-                            card: '#161a20',
-                            panel: '#1c2128',
-                            border: '#2a303a',
-                            borderLight: '#3b434f'
+                            base: '#0b0b0d',
+                            card: '#151518',
+                            panel: '#1c1c21',
+                            border: '#2c2c34',
+                            borderLight: '#40404c'
                         },
                         cyber: {
-                            cyan: '#ff6a1a',
-                            blue: '#8fa3bd',
-                            green: '#4ade80',
-                            amber: '#e2b53f',
-                            red: '#ef4444',
+                            cyan: '#e10600',
+                            blue: '#ffc400',
+                            green: '#8de03c',
+                            amber: '#ffc400',
+                            red: '#ff4d4d',
                         }
                     },
                     fontFamily: {
                         sans: ['Barlow', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        mono: ['Barlow Semi Condensed', 'sans-serif'],
                     }
                 }
             }
@@ -41,35 +45,74 @@
     </script>
 
     <style>
-        body{background-color:#0f1216;
-            background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 2px,transparent 2px 8px),radial-gradient(ellipse at 50% -10%,rgba(255,106,26,.10),transparent 55%);
-            color:#ece9e3}
-        .led-dot{width:8px;height:8px;border-radius:1px;display:inline-block;transform:rotate(45deg)}
-        .led-green{background-color:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.7);animation:pulseGlow 1.8s infinite ease-in-out}
-        .led-cyan{background-color:#ff6a1a;box-shadow:0 0 6px rgba(255,106,26,.8);animation:pulseGlow 2.2s infinite ease-in-out}
-        .led-red{background-color:#ef4444;box-shadow:0 0 6px rgba(239,68,68,.7)}
-        @keyframes pulseGlow{0%,100%{opacity:1}50%{opacity:.4}}
-        @media (prefers-reduced-motion:reduce){.led-green,.led-cyan{animation:none}}
-        ::-webkit-scrollbar{width:6px;height:6px}
-        ::-webkit-scrollbar-track{background:#0f1216}
-        ::-webkit-scrollbar-thumb{background:#3b434f;border-radius:1px}
-        ::-webkit-scrollbar-thumb:hover{background:#ff6a1a}
-        .scanlines{position:relative;overflow:hidden}
-        /* Sharper, tougher shapes */
-        .rounded-xl{border-radius:4px!important}
-        .rounded-lg{border-radius:3px!important}
-        h1,h2{font-family:'Barlow Condensed',sans-serif!important;letter-spacing:.05em}
-        h1{font-size:1.35rem!important}
-        header.bg-dark-card,main.bg-dark-card{border-top:3px solid #ff6a1a}
-        #loginModal>div{border-left:4px solid #ff6a1a;clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
-        button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #ff8a47;outline-offset:2px}
+        /* Latar aspal gelap + cahaya merah racing + speed streak */
+        body {
+            background-color: #0e0e10;
+            background-image:
+                radial-gradient(circle at 50% 0%, rgba(225, 6, 0, 0.16), transparent 55%),
+                repeating-linear-gradient(100deg, transparent 0 38px, rgba(255,255,255,0.02) 38px 39px, transparent 39px 76px),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(315deg, rgba(255, 255, 255, 0.03) 25%, #0e0e10 25%);
+            background-position: 0 0, 0 0, 6px 0, 6px 0, 0 0, 0 0;
+            background-size: 100% 100%, 100% 100%, 12px 12px, 12px 12px, 12px 12px, 12px 12px;
+            background-attachment: fixed;
+            color: #e4e6ea;
+        }
+
+        /* Lampu indikator */
+        .led-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .led-green { background-color: #8de03c; box-shadow: 0 0 8px #8de03c, 0 0 12px #8de03c; animation: pulseGlow 1.8s infinite ease-in-out; }
+        .led-cyan { background-color: #e10600; box-shadow: 0 0 8px #e10600; animation: pulseGlow 2.2s infinite ease-in-out; }
+        .led-red { background-color: #ff4d4d; box-shadow: 0 0 8px #ff4d4d; }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0b0b0d; }
+        ::-webkit-scrollbar-thumb { background: #2c2c34; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e10600; }
+
+        /* Strip bendera balap di atas panel */
+        .checker-top { position: relative; overflow: hidden; }
+        .checker-top::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; z-index: 10; pointer-events: none;
+            background: repeating-conic-gradient(#f4f4f6 0 25%, #0b0b0d 0 50%) 0 0 / 16px 16px;
+        }
+        header.checker-top, main.checker-top { padding-top: 1.7rem !important; }
+
+        /* Sudut lebih tegas */
+        .rounded-xl { border-radius: 6px !important; }
+        .rounded-lg { border-radius: 4px !important; }
+        .rounded { border-radius: 3px !important; }
+
+        /* Judul gaya balap */
+        h1, h2 { font-family: 'Teko', sans-serif !important; font-style: italic; font-weight: 600 !important; letter-spacing: 0.05em; }
+        h1 { font-size: 1.75rem !important; line-height: 1 !important; }
+        h2 { font-size: 1.45rem !important; line-height: 1.1 !important; }
+        #statTotal, #statPending, #statApproved, #statRejected {
+            font-family: 'Teko', sans-serif !important; font-size: 2.6rem !important; line-height: 1 !important; font-weight: 600 !important;
+        }
+
+        /* Garis aksen di kartu statistik */
+        section > div { border-left-width: 4px !important; }
+        section > div:nth-child(1) { border-left-color: #f4f4f6 !important; }
+        section > div:nth-child(2) { border-left-color: #ffc400 !important; }
+        section > div:nth-child(3) { border-left-color: #8de03c !important; }
+        section > div:nth-child(4) { border-left-color: #ff4d4d !important; }
+
+        button:focus-visible { outline: 2px solid #ffc400; outline-offset: 2px; }
     </style>
 </head>
 <body class="font-sans antialiased min-h-screen flex flex-col justify-between">
 
     <!-- LOGIN MODAL (GATEWAY AUTHENTICATION) -->
     <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
-        <div class="w-full max-w-md bg-dark-card border border-dark-borderLight rounded-xl p-6 shadow-2xl shadow-black/60 relative overflow-hidden scanlines">
+        <div class="w-full max-w-md bg-dark-card border border-dark-borderLight rounded-xl p-6 pt-8 shadow-2xl shadow-red-950/40 relative overflow-hidden checker-top">
             <!-- Terminal Header -->
             <div class="flex items-center justify-between border-b border-dark-border pb-4 mb-5">
                 <div class="flex items-center space-x-2">
@@ -81,7 +124,7 @@
 
             <div class="text-center mb-6">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 mb-3 text-cyber-cyan">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    <span style="font-size:22px;line-height:1">🏍️</span>
                 </div>
                 <h2 class="text-lg font-bold text-white tracking-wide">TKJ HOTSPOT GATEWAY</h2>
                 <p class="text-xs text-gray-400 mt-1 font-mono">Authentication Required for Admin Node</p>
@@ -113,7 +156,7 @@
     <div id="dashboardApp" class="hidden flex-1 flex flex-col max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         
         <!-- HEADER / ROUTER NAVBAR -->
-        <header class="bg-dark-card border border-dark-border rounded-xl p-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-lg">
+        <header class="checker-top bg-dark-card border border-dark-border rounded-xl p-4 sm:px-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-lg">
             <!-- Left Brand -->
             <div class="flex items-center space-x-4">
                 <div class="w-10 h-10 rounded-lg bg-cyber-cyan/10 border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan">
@@ -202,7 +245,7 @@
         </section>
 
         <!-- MAIN NETWORK USER CONTROL PANEL -->
-        <main class="bg-dark-card border border-dark-border rounded-xl p-5 shadow-xl flex flex-col flex-1">
+        <main class="checker-top bg-dark-card border border-dark-border rounded-xl p-5 shadow-xl flex flex-col flex-1">
             <!-- Table Header Bar -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
                 <div>
